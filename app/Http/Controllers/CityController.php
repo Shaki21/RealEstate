@@ -12,7 +12,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        //
+        return City::all();
     }
 
     /**
@@ -20,7 +20,12 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'country_id'=>'required|exists:countries,id'
+        ]);
+
+        return City::create($request->all());
     }
 
     /**
@@ -28,7 +33,7 @@ class CityController extends Controller
      */
     public function show(City $city)
     {
-        //
+        return $city;
     }
 
     /**
@@ -36,7 +41,12 @@ class CityController extends Controller
      */
     public function update(Request $request, City $city)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'country_id'=>'required|exists:countries,id'
+        ]);
+
+        return $city->update($request->all());
     }
 
     /**
@@ -44,6 +54,6 @@ class CityController extends Controller
      */
     public function destroy(City $city)
     {
-        //
+        return $city->delete();
     }
 }

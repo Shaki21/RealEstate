@@ -13,6 +13,19 @@ return new class extends Migration
     {
         Schema::create('houses', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->decimal('price', 10);
+            $table->integer('bedroom');
+            $table->integer('bathroom');
+            $table->integer('quadrature');
+            $table->integer('floors');
+            $table->integer('garden_quadrature');
+            $table->string('address');
+            $table->string("image_path");
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('city_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('city_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
