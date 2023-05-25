@@ -39,21 +39,43 @@ class CityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, City $city)
+    public function update(Request $request, string $id)
     {
         $request->validate([
-            'name'=>'required',
+            'name' => 'required|string|max:255',
             'country_id'=>'required|exists:countries,id'
         ]);
-
-        return $city->update($request->all());
+        $city = City::find($id);
+        if ($city) {
+            $city->update([
+                'name' => $request->name,
+            ]);
+            return response()->json([
+                'city' => $city
+            ]);
+        }else {
+            return response()->json([
+                'message' => 'City not found',
+            ], 404);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(City $city)
+    public function destroy(string $id)
     {
-        return $city->delete();
+        $city = City::find($id);
+        if ($city){
+            $city->delete();
+            return response()->json([
+                'message' => 'City ' . $city->name . ' deleted successfully'
+            ]);
+        }
+        else{
+            return response()->json([
+                'message' => 'City not found',
+            ], 404);
+        }
     }
 }
