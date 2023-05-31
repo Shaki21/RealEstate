@@ -32,7 +32,9 @@ class HouseController extends Controller
             'quadrature' => 'required|integer',
             'floors' => 'required|integer',
             'garden_quadrature' => 'required|integer',
-            'address' => 'required|string|max:255'
+            'address' => 'required|string|max:255',
+            'user_id'=>'required|integer',
+            'city_id' => 'required|string|max:255'
         ]);
         $house = House::create([
             'title' => $request->title,
@@ -42,7 +44,9 @@ class HouseController extends Controller
             'quadrature' => $request->quadrature,
             'floors' => $request->floors,
             'garden_quadrature' => $request->garden_quadrature,
-            'address' => $request->address
+            'address' => $request->address,
+            'user_id'=>$request->user_id,
+            'city_id'=>$request->city_id
         ]);
 
         return response()->json([
@@ -67,7 +71,7 @@ class HouseController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'price' => 'required|decimal:8,2',
+            'price' => 'required|numeric',
             'bedroom' => 'required|integer',
             'bathroom' => 'required|integer',
             'quadrature' => 'required|integer',
