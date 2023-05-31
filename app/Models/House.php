@@ -18,6 +18,7 @@ class House extends Model
         'floors',
         'garden_quadrature',
         'address',
-        'image_path'
+        'user_id',
+        'city_id'
     ];
 }
