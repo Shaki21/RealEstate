@@ -66,7 +66,7 @@ class AuthController extends Controller
             'token_type' => 'bearer',
         ];
 
-        return response($response, 200);
+        return response($response, 201);
     }
 
     public function logout(Request $request)
