@@ -29,7 +29,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 // Create a User
-Route::post('/users', [UserController::class, 'store'])->middleware('auth:sanctum', 'is_admin');
+Route::post('/users', [UserController::class, 'store']);
 // Update a User
 Route::put('/user/{id}', [UserController::class, 'update'])->middleware('auth:sanctum', 'is_admin');
 // Get all Users
@@ -72,7 +72,7 @@ Route::delete('/house/{id}', [HouseController::class, 'destroy'])->middleware('a
 Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
-    Route::get('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');;
+    Route::get('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
     // Get authenticated user
     Route::get('user', [AuthController::class, 'user'])->middleware('auth:sanctum');
     // Update authenticated user
@@ -80,7 +80,7 @@ Route::prefix('auth')->group(function () {
 
     // Admin methods
     // Get All users method for Admin
-    Route::get('/users', [AuthController::class, 'allUsers'])->middleware('auth:sanctum', 'is_admin');;
+    Route::get('/users', [AuthController::class, 'allUsers'])->middleware('auth:sanctum', 'is_admin');
     // Update User method for Admin
     Route::put('/users/{user}', [AuthController::class, 'adminUpdateUser'])->middleware('auth:sanctum', 'is_admin');
     // Delete User method for Admin

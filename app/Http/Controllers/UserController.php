@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -30,17 +31,15 @@ class UserController extends Controller
             'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6',
-            'is_admin' => 'boolean',
-            'image_path' => 'string|max:255'
+            'is_admin' => 'boolean'
         ]);
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'username' => $request->username,
             'email' => $request->email,
-            'password' =>  hash('sha256', $request->password),
-            'is_admin' => $request->is_admin,
-            'image_path' => $request->image_path
+            'password' =>  Hash::make($request->password),
+            'is_admin' => $request->is_admin
         ]);
 
         return response()->json([
