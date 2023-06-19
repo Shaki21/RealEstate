@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\CookieController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\HouseController;
 use App\Http\Controllers\UserController;
@@ -86,3 +87,10 @@ Route::prefix('auth')->group(function () {
     // Delete User method for Admin
     Route::delete('/users/{user}', [AuthController::class, 'destroy'])->middleware('auth:sanctum', 'is_admin');
 });
+
+//Create Cookie
+Route::get('/set-cookie', [CookieController::class, 'setCookie']);
+//Get Cookie
+Route::get('/get-cookie', [CookieController::class, 'getCookie']);
+//Del Cookie
+Route::get('/del-cookie', [CookieController::class, 'delCookie']);
