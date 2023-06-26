@@ -50,13 +50,13 @@ Route::delete('/city/{id}', [CityController::class, 'destroy'])->middleware('aut
 
 
 // Create a Country
-Route::post('/country', [CountryController::class, 'store'])->middleware('auth:sanctum', 'is_admin');
+Route::post('/country', [CountryController::class, 'store']);
 // Update a Country
-Route::put('/country/{id}', [CountryController::class, 'update'])->middleware('auth:sanctum', 'is_admin');
+Route::put('/country/{id}', [CountryController::class, 'update']);
 // Get all Countries
 Route::get('/countries', [CountryController::class, 'index']);
 // Delete a Country
-Route::delete('/country/{id}', [CountryController::class, 'destroy'])->middleware('auth:sanctum', 'is_admin');
+Route::delete('/country/{id}', [CountryController::class, 'destroy']);
 
 
 // Create a House
@@ -87,10 +87,3 @@ Route::prefix('auth')->group(function () {
     // Delete User method for Admin
     Route::delete('/users/{user}', [AuthController::class, 'destroy'])->middleware('auth:sanctum', 'is_admin');
 });
-
-//Create Cookie
-Route::get('/set-cookie', [CookieController::class, 'setCookie']);
-//Get Cookie
-Route::get('/get-cookie', [CookieController::class, 'getCookie']);
-//Del Cookie
-Route::get('/del-cookie', [CookieController::class, 'delCookie']);

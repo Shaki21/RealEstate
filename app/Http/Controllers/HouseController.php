@@ -120,4 +120,6 @@ class HouseController extends Controller
         }
 
     }
+
+    public 
 }
