@@ -121,5 +121,17 @@ class HouseController extends Controller
 
     }
 
-    public 
+    public function getHouseById($id)
+    {
+        $house = House::find($id);
+
+        if (!$house) {
+            return response()->json([
+                'message' => 'House not found',
+            ], 404);
+        }
+
+        return $house;
+    }
+
 }

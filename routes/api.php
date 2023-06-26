@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CityController;
-use App\Http\Controllers\CookieController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\HouseController;
 use App\Http\Controllers\UserController;
@@ -23,50 +22,54 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-#Users
-#Houses
-#Country
-#City
 
 
 // Create a User
-Route::post('/users', [UserController::class, 'store']);
-// Update a User
-Route::put('/user/{id}', [UserController::class, 'update'])->middleware('auth:sanctum', 'is_admin');
+Route::post('/users', [UserController::class, 'store'])->middleware('auth:sanctum', 'is_admin');
+// Get a single user
+Route::get('/user/{id}', [UserController::class, 'getUserById'])->middleware('auth:sanctum');
 // Get all Users
 Route::get('/users', [UserController::class, 'index']);
+// Update a User
+Route::put('/user/{id}', [UserController::class, 'update'])->middleware('auth:sanctum', 'is_admin');
 // Delete a user
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->middleware('auth:sanctum', 'is_admin');
 
 
 // Create a City
 Route::post('/city', [CityController::class, 'store'])->middleware('auth:sanctum', 'is_admin');
-// Update a City
-Route::put('/city/{id}', [CityController::class, 'update'])->middleware('auth:sanctum', 'is_admin');
+// Get a single city
+Route::get('/city/{id}', [CityController::class, 'getCityById'])->middleware('auth:sanctum');
 // Get all Cities
 Route::get('/cities', [CityController::class, 'index']);
+// Update a City
+Route::put('/city/{id}', [CityController::class, 'update'])->middleware('auth:sanctum', 'is_admin');
 // Delete a City
 Route::delete('/city/{id}', [CityController::class, 'destroy'])->middleware('auth:sanctum', 'is_admin');
 
 
 // Create a Country
-Route::post('/country', [CountryController::class, 'store']);
-// Update a Country
-Route::put('/country/{id}', [CountryController::class, 'update']);
+Route::post('/country', [CountryController::class, 'store'])->middleware('auth:sanctum', 'is_admin');
+// Get a single country
+Route::get('/country/{id}', [CountryController::class, 'getCountryById'])->middleware('auth:sanctum', 'is_admin');
 // Get all Countries
 Route::get('/countries', [CountryController::class, 'index']);
+// Update a Country
+Route::put('/country/{id}', [CountryController::class, 'update'])->middleware('auth:sanctum', 'is_admin');
 // Delete a Country
-Route::delete('/country/{id}', [CountryController::class, 'destroy']);
+Route::delete('/country/{id}', [CountryController::class, 'destroy'])->middleware('auth:sanctum', 'is_admin');
 
 
 // Create a House
 Route::post('/house', [HouseController::class, 'store'])->middleware('auth:sanctum', 'is_admin');
-// Update a House
-Route::put('/house/{id}', [HouseController::class, 'update'])->middleware('auth:sanctum', 'is_admin');
+// Get a single house
+Route::get('/house/{id}', [HouseController::class, 'getHouseById'])->middleware('auth:sanctum');
 // Get all Houses
 Route::get('/houses', [HouseController::class, 'index']);
+// Update a House
+Route::put('/house/{id}', [HouseController::class, 'update'])->middleware('auth:sanctum');
 // Delete a House
-Route::delete('/house/{id}', [HouseController::class, 'destroy'])->middleware('auth:sanctum', 'is_admin');
+Route::delete('/house/{id}', [HouseController::class, 'destroy'])->middleware('auth:sanctum');
 
 
 // Auth Routes

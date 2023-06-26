@@ -77,4 +77,17 @@ class CountryController extends Controller
         }
 
     }
+
+    public function getCountryById($id)
+    {
+        $country = Country::find($id);
+
+        if (!$country) {
+            return response()->json([
+                'message' => 'Country not found',
+            ], 404);
+        }
+
+        return $country;
+    }
 }

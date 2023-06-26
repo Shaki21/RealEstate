@@ -78,4 +78,17 @@ class CityController extends Controller
             ], 404);
         }
     }
+
+    public function getCityById($id)
+    {
+        $city = City::find($id);
+
+        if (!$city) {
+            return response()->json([
+                'message' => 'City not found',
+            ], 404);
+        }
+
+        return $city;
+    }
 }
