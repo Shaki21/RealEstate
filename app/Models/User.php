@@ -17,7 +17,8 @@ class User extends Model
         'email',
         'password',
         'is_admin',
-        'image_path'
+        'image_path',
+        'city_id'
     ];
 
     protected $hidden = [

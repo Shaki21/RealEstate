@@ -33,7 +33,8 @@ class HouseController extends Controller
             'floors' => 'required|integer',
             'garden_quadrature' => 'required|integer',
             'address' => 'required|string|max:255',
-            'user_id'=>'required|integer',
+            'property_type' => 'required|string|max:255',
+            'property_status' => 'required|string|max:255',
             'city_id' => 'required|string|max:255'
         ]);
         $house = House::create([
@@ -45,7 +46,8 @@ class HouseController extends Controller
             'floors' => $request->floors,
             'garden_quadrature' => $request->garden_quadrature,
             'address' => $request->address,
-            'user_id'=>$request->user_id,
+            'property_type' => $request->property_type,
+            'property_status' => $request->property_status,
             'city_id'=>$request->city_id
         ]);
 
@@ -77,7 +79,9 @@ class HouseController extends Controller
             'quadrature' => 'required|integer',
             'floors' => 'required|integer',
             'garden_quadrature' => 'required|integer',
-            'address' => 'required|string|max:255'
+            'address' => 'required|string|max:255',
+            'property_type' => 'required|string|max:255',
+            'property_status' => 'required|string|max:255'
         ]);
         $house = House::find($id);
         if ($house) {
@@ -89,7 +93,9 @@ class HouseController extends Controller
                 'quadrature' => $request->quadrature,
                 'floors' => $request->floors,
                 'garden_quadrature' => $request->garden_quadrature,
-                'address' => $request->address
+                'address' => $request->address,
+                'property_type' => $request->property_type,
+                'property_status' => $request->property_status
             ]);
             return response()->json([
                 'house' => $house

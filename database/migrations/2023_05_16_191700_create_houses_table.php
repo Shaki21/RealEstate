@@ -20,11 +20,11 @@ return new class extends Migration
             $table->integer('quadrature');
             $table->integer('floors');
             $table->integer('garden_quadrature');
-            $table->string('address');  
-            $table->unsignedBigInteger('user_id');
+            $table->string('address');
+            $table->string('property_type');
+            $table->string('property_status');
             $table->unsignedBigInteger('city_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('city_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('city_id')->references('id')->on('cities');
             $table->timestamps();
         });
     }

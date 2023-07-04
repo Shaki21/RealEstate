@@ -18,7 +18,13 @@ class House extends Model
         'floors',
         'garden_quadrature',
         'address',
-        'user_id',
+        'property_type',
+        'property_status',
         'city_id'
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at'
     ];
 }

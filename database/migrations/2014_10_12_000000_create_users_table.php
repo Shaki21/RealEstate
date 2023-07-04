@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('is_admin')->default(0);
             $table->string('image_path')->default('default_avatar.png');
+            $table->unsignedBigInteger('city_id')->nullable();
+            $table->foreign('city_id')->references('id')->on('users')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });
