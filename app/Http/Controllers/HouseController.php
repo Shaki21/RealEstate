@@ -12,7 +12,7 @@ class HouseController extends Controller
      */
     public function index()
     {
-        $houses = House::all();
+        $houses = House::paginate(20);
 
         return response()->json([
             'houses' => $houses,
@@ -35,6 +35,7 @@ class HouseController extends Controller
             'address' => 'required|string|max:255',
             'property_type' => 'required|string|max:255',
             'property_status' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
             'city_id' => 'required|string|max:255'
         ]);
         $house = House::create([
@@ -48,6 +49,7 @@ class HouseController extends Controller
             'address' => $request->address,
             'property_type' => $request->property_type,
             'property_status' => $request->property_status,
+            'description' => $request->description,
             'city_id'=>$request->city_id
         ]);
 
@@ -81,7 +83,8 @@ class HouseController extends Controller
             'garden_quadrature' => 'required|integer',
             'address' => 'required|string|max:255',
             'property_type' => 'required|string|max:255',
-            'property_status' => 'required|string|max:255'
+            'property_status' => 'required|string|max:255',
+            'description' => 'required|string|max:255'
         ]);
         $house = House::find($id);
         if ($house) {
@@ -95,7 +98,8 @@ class HouseController extends Controller
                 'garden_quadrature' => $request->garden_quadrature,
                 'address' => $request->address,
                 'property_type' => $request->property_type,
-                'property_status' => $request->property_status
+                'property_status' => $request->property_status,
+                'description' => $request->description
             ]);
             return response()->json([
                 'house' => $house

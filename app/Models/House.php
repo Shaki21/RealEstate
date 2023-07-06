@@ -20,6 +20,7 @@ class House extends Model
         'address',
         'property_type',
         'property_status',
+        'description',
         'city_id'
     ];
 
