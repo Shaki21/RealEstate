@@ -12,9 +12,12 @@ class CountryController extends Controller
      */
     public function index()
     {
-        return Country::all();
-    }
+        $countries = Country::all();
 
+        return response()->json([
+            'countries' => $countries,
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      */
