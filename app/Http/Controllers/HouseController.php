@@ -10,9 +10,21 @@ class HouseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $houses = House::paginate(20);
+        $query = House::query();
+
+        if ($request->has('bedroom')) {
+            $bedroom = $request->input('bedroom');
+            $query->where('bedroom', $bedroom);
+        }
+
+        if ($request->has('floors')) {
+            $floors = $request->input('floors');
+            $query->where('floors', $floors);
+        }
+
+        $houses = $query->paginate(20);
 
         return response()->json([
             'houses' => $houses,
