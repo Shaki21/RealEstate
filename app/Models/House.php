@@ -21,11 +21,16 @@ class House extends Model
         'property_type',
         'property_status',
         'description',
-        'city_id'
+        'cityName',
+        'countryName'
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at'
     ];
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'cityName', 'name');
+    }
 }

@@ -24,6 +24,21 @@ class HouseController extends Controller
             $query->where('floors', $floors);
         }
 
+        if ($request->has('cityName')) {
+            $cityName = $request->input('cityName');
+            $query->where('cityName', $cityName);
+        }
+
+        if ($request->has('countryName')) {
+            $countryName = $request->input('countryName');
+            $query->where('countryName', $countryName);
+        }
+
+        if ($request->has('price')) {
+            $price = $request->input('price');
+            $query->where('price', '<=', $price);
+        }
+
         $houses = $query->paginate(20);
 
         return response()->json([
@@ -48,7 +63,8 @@ class HouseController extends Controller
             'property_type' => 'required|string|max:255',
             'property_status' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'city_id' => 'required|string|max:255'
+            'cityName' => 'required|string|max:255',
+            'countryName' => 'required|string|max:255'
         ]);
         $house = House::create([
             'title' => $request->title,
@@ -62,7 +78,8 @@ class HouseController extends Controller
             'property_type' => $request->property_type,
             'property_status' => $request->property_status,
             'description' => $request->description,
-            'city_id'=>$request->city_id
+            'cityName'=>$request->cityName,
+            'countryName'=>$request->countryName
         ]);
 
         return response()->json([
