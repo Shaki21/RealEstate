@@ -24,8 +24,11 @@ return new class extends Migration
             $table->string('property_type');
             $table->string('property_status');
             $table->string('description');
-            $table->unsignedBigInteger('city_id');
-            $table->foreign('city_id')->references('id')->on('cities');
+            $table->string("image_path")->nullable();
+            $table->string('cityName');
+            $table->string('countryName');
+            $table->foreign('cityName')->references('name')->on('cities');
+            $table->foreign('countryName')->references('name')->on('countries');
             $table->timestamps();
         });
     }
