@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('property_type');
             $table->string('property_status');
             $table->string('description');
+            $table->string("image_path")->nullable();
             $table->string('cityName');
             $table->string('countryName');
             $table->foreign('cityName')->references('name')->on('cities');

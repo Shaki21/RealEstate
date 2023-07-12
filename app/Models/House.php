@@ -21,6 +21,7 @@ class House extends Model
         'property_type',
         'property_status',
         'description',
+        'image_path',
         'cityName',
         'countryName'
     ];

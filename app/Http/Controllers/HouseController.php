@@ -36,7 +36,11 @@ class HouseController extends Controller
 
         if ($request->has('price')) {
             $price = $request->input('price');
-            $query->where('price', '<=', $price);
+            $query->where(function ($query) use ($price) {
+                $query->where('price', '<', $price)
+                    ->orWhere('price', '=', $price)
+                    ->orWhere('price', '>', $price);
+            });
         }
 
         $houses = $query->paginate(20);
@@ -171,6 +175,13 @@ class HouseController extends Controller
         }
 
         return $house;
+    }
+
+
+    public function uploadImage(Request $request){
+        $pathToFile = $request->file('image')->store('images', 'public');
+
+        return $pathToFile;
     }
 
 }
