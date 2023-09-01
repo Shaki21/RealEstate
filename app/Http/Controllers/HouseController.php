@@ -35,15 +35,16 @@ class HouseController extends Controller
         }
 
         if ($request->has('price')) {
-            $price = $request->input('price');
-            $query->where(function ($query) use ($price) {
-                $query->where('price', '<', $price)
-                    ->orWhere('price', '=', $price)
-                    ->orWhere('price', '>', $price);
-            });
+            $priceRange = explode(',', $request->input('price'));
+            if (count($priceRange) === 2) {
+                $minPrice = (int) $priceRange[0];
+                $maxPrice = (int) $priceRange[1];
+                $query->whereBetween('price', [$minPrice, $maxPrice])
+                    ->orderBy('price', 'asc');
+            }
         }
 
-        $houses = $query->paginate(20);
+        $houses = $query->paginate(12);
 
         return response()->json([
             'houses' => $houses,

@@ -78,7 +78,7 @@ class UserController extends Controller
                 'last_name' => $request->last_name,
                 'username' => $request->username,
                 'email' => $request->email,
-                'password' =>  hash('sha256', $request->password),
+                'password' =>  Hash::make($request->password),
                 'is_admin' => $request->is_admin,
                 'image_path' => $request->image_path
             ]);
