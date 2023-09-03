@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\HouseController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -72,6 +73,11 @@ Route::put('/house/{id}', [HouseController::class, 'update'])->middleware('auth:
 Route::delete('/house/{id}', [HouseController::class, 'destroy'])->middleware('auth:sanctum');
 //upload a picture
 Route::post('/picture', [HouseController::class, 'uploadImage'])->middleware('auth:sanctum', 'is_admin');
+
+Route::post('/upload-image', [ImageController::class, 'upload']);
+
+//Route::post('/upload-image', 'ImageController@upload')->name('upload.image');
+
 
 
 // Auth Routes

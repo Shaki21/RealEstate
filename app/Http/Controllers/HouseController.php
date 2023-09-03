@@ -23,7 +23,10 @@ class HouseController extends Controller
             $floors = $request->input('floors');
             $query->where('floors', $floors);
         }
-
+        if ($request->has('bathroom')) {
+            $bathroom = $request->input('bathroom');
+            $query->where('bathroom', $bathroom);
+        }
         if ($request->has('cityName')) {
             $cityName = $request->input('cityName');
             $query->where('cityName', $cityName);
