@@ -3,31 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use App\models\Image;
 
 class ImageController extends Controller
 {
-    public function upload(Request $request)
+    public function uploadImage(Request $request)
     {
-
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
 
-        $imageName = Str::random(20) . '.' . $request->file('image')->getClientOriginalExtension();
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images', $imageName);
 
+            // Spremanje linka do slike u bazu podataka
+            $imageUrl = asset('storage/images/' . $imageName);
 
-        $imagePath = 'uploads/' . $imageName;
+            $newImage = new Image;
+            $newImage->image_url = $imageUrl;
+            $newImage->save();
 
-
-        Storage::disk('public')->put($imagePath, file_get_contents($request->file('image')));
-
-
-        $imageUrl = asset('storage/' . $imagePath);
-
-        return response()->json(['message' => 'Slika je uspešno postavljena.', 'image_url' => $imageUrl]);
+            return response()->json(['message' => 'Slika je uspešno uploadovana.', 'image_url' => $imageUrl]);
+        } else {
+            return response()->json(['error' => 'Niste odabrali sliku.'], 400);
+        }
     }
-
 }

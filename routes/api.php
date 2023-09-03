@@ -71,13 +71,10 @@ Route::get('/houses', [HouseController::class, 'index']);
 Route::put('/house/{id}', [HouseController::class, 'update'])->middleware('auth:sanctum');
 // Delete a House
 Route::delete('/house/{id}', [HouseController::class, 'destroy'])->middleware('auth:sanctum');
-//upload a picture
-Route::post('/picture', [HouseController::class, 'uploadImage'])->middleware('auth:sanctum', 'is_admin');
 
-Route::post('/upload-image', [ImageController::class, 'upload']);
 
-//Route::post('/upload-image', 'ImageController@upload')->name('upload.image');
-
+// upload image
+Route::post('/upload-image', [ImageController::class, 'uploadImage']);
 
 
 // Auth Routes
