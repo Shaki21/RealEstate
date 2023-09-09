@@ -67,6 +67,8 @@ Route::post('/house', [HouseController::class, 'store'])->middleware('auth:sanct
 Route::get('/house/{id}', [HouseController::class, 'getHouseById'])->middleware('auth:sanctum');
 // Get all Houses
 Route::get('/houses', [HouseController::class, 'index']);
+// Get all Houses without pagination
+Route::get('/house-filtered', [HouseController::class, 'filteredHouses']);
 // Update a House
 Route::put('/house/{id}', [HouseController::class, 'update'])->middleware('auth:sanctum');
 // Delete a House

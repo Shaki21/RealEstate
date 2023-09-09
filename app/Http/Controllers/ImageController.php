@@ -27,7 +27,7 @@ class ImageController extends Controller
 
         $imageUrl = asset('storage/' . $imagePath);
 
-        return response()->json(['message' => 'Slika je uspešno postavljena.', 'image_url' => $imageUrl]);
+        return response()->json(['message' => 'Slika je uspješno postavljena.', 'image_url' => $imageUrl]);
     }
 
 }

@@ -53,6 +53,49 @@ class HouseController extends Controller
             'houses' => $houses,
         ]);
     }
+    public function filteredHouses(Request $request)
+    {
+        $query = House::query();
+
+        if ($request->has('bedroom')) {
+            $bedroom = $request->input('bedroom');
+            $query->where('bedroom', $bedroom);
+        }
+
+        if ($request->has('floors')) {
+            $floors = $request->input('floors');
+            $query->where('floors', $floors);
+        }
+        if ($request->has('bathroom')) {
+            $bathroom = $request->input('bathroom');
+            $query->where('bathroom', $bathroom);
+        }
+        if ($request->has('cityName')) {
+            $cityName = $request->input('cityName');
+            $query->where('cityName', $cityName);
+        }
+
+        if ($request->has('countryName')) {
+            $countryName = $request->input('countryName');
+            $query->where('countryName', $countryName);
+        }
+
+        if ($request->has('price')) {
+            $priceRange = explode(',', $request->input('price'));
+            if (count($priceRange) === 2) {
+                $minPrice = (int) $priceRange[0];
+                $maxPrice = (int) $priceRange[1];
+                $query->whereBetween('price', [$minPrice, $maxPrice])
+                    ->orderBy('price', 'asc');
+            }
+        }
+
+        $houses = $query->get();
+
+        return response()->json([
+            'houses' => $houses,
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
