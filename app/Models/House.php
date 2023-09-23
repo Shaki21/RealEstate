@@ -34,4 +34,14 @@ class House extends Model
     {
         return $this->belongsTo(City::class, 'cityName', 'name');
     }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class, 'house_id', 'id');
+    }
+
+    public function getImagePathsAttribute()
+    {
+        return $this->images->pluck('image_path')->toArray();
+    }
 }

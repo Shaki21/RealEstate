@@ -2,12 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ImageController extends Controller
 {
+    public function index()
+    {
+        $images = Image::all();
+
+        return response()->json([
+            'images$images' => $images,
+        ]);
+    }
+
+    public function filterByHouse($house_id)
+    {
+    $images = Image::select('id', 'image_path', 'house_id')
+        ->whereHas('house', function ($query) use ($house_id) {
+            $query->where('id', $house_id);
+        })
+        ->get();
+
+    return response()->json($images);
+    }
+    
     public function upload(Request $request)
     {
 
