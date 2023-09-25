@@ -4,8 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\HouseController;
-use App\Http\Controllers\ImageController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -67,8 +67,8 @@ Route::post('/house', [HouseController::class, 'store'])->middleware('auth:sanct
 Route::get('/house/{id}', [HouseController::class, 'getHouseById'])->middleware('auth:sanctum');
 // Get all Houses
 Route::get('/houses', [HouseController::class, 'index']);
-// Get all Houses without pagination
-Route::get('/house-filtered', [HouseController::class, 'filteredHouses']);
+// Get all Houses max price
+Route::get('/house-max-price', [HouseController::class, 'maxHousePrice']);
 // Update a House
 Route::put('/house/{id}', [HouseController::class, 'update'])->middleware('auth:sanctum');
 // Delete a House
@@ -80,6 +80,10 @@ Route::post('/upload-image', [ImageController::class, 'upload']);
 
 //Route::post('/upload-image', 'ImageController@upload')->name('upload.image');
 
+// Route to get all images (images)
+Route::get('/images', [ImageController::class, 'index']);
+// Route to get images for house by id 
+Route::get('/images/{id}', [ImageController::class, 'filterByHouse']);
 
 
 // Auth Routes
@@ -99,4 +103,11 @@ Route::prefix('auth')->group(function () {
     Route::put('/users/{user}', [AuthController::class, 'adminUpdateUser'])->middleware('auth:sanctum', 'is_admin');
     // Delete User method for Admin
     Route::delete('/users/{user}', [AuthController::class, 'destroy'])->middleware('auth:sanctum', 'is_admin');
+
+
+    
 });
+
+
+
+
